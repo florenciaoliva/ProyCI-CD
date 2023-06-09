@@ -40,4 +40,8 @@ jobs:
       run: |
         export PYTHONPATH=src
         pytest
+    - name: Deploy to render
+      with:
+        service-id: ${{ secrets.SERVICE_ID }}
+        api-key: ${{ secrets.RENDER_API_KEY }}
 
