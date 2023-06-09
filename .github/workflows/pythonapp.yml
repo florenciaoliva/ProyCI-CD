@@ -40,8 +40,17 @@ jobs:
       run: |
         export PYTHONPATH=src
         pytest
-    - name: Deploy to render
-      with:
-        service-id: ${{ secrets.SERVICE_ID }}
-        api-key: ${{ secrets.RENDER_API_KEY }}
+        
+  deploy:
+    needs: [build]
+    name: Wait for Deploy
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_API_KEY }}
+          github-token: ${{ secrets.SERVICE_ID }}
+          service-id: srv-ci165dndvk4kgouspdj0
+
 
