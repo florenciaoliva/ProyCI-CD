@@ -42,6 +42,7 @@ jobs:
         pytest
         
   deploy:
+    permissions: write-all
     needs: [build]
     name: Wait for Deploy
     runs-on: ubuntu-22.04
